@@ -45,7 +45,10 @@ BOOT_SOUND 	:=	branding/bootSound.btsnd
 #-------------------------------------------------------------------------------
 # options for code generation
 #-------------------------------------------------------------------------------
-CFLAGS 		:= -DDEBUG -DNOOPENGL $(INCLUDE) -D__WIIU__ -D__WUT__
+CFLAGS := -DNOOPENGL -O3 -Ofast -ffast-math -funroll-loops -fexceptions -Wall \
+          -fdata-sections -ffunction-sections -flto \
+          -fomit-frame-pointer -fno-common -falign-loops -falign-jumps \
+          -mcpu=750 -meabi -mhard-float $(INCLUDE) -D__WIIU__ -D__WUT__
 CXXFLAGS	:= $(CFLAGS)
 
 ASFLAGS	:=	-g $(ARCH)
