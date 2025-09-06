@@ -1,0 +1,15 @@
+dist/
+build/
+lib/
+todo.md
+
+*.elf
+*.rpx
+*.wuhb
+*.zip
+
+shaders/easter_egg.*
+
+.project
+.cproject
+.map
