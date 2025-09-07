@@ -27,6 +27,7 @@
 #include <unistd.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <whb/proc.h>
 
 #ifndef WIN32
 #include <sys/types.h>
@@ -271,7 +272,7 @@ void title(void)
   random_timer.start(rand() % 2000 + 2000);
 
   Menu::set_current(main_menu);
-  while (Menu::current())
+  while (Menu::current() && WHBProcIsRunning())
     {
       // if we spent to much time on a menu entry
       if( (update_time - last_update_time) > 1000)

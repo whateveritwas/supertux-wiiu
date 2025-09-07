@@ -303,7 +303,7 @@ void free_strings(char **strings, int num)
 /* Set SuperTux configuration and save directories */
 void st_directory_setup(void)
 {
-  char *home = "/wiiu/apps/supertux-wiiu/home";
+  char *home = "/vol/external01/wiiu/apps/supertux-wiiu/home";
   char str[1024];
 
   st_dir = (char *) malloc(sizeof(char) * (strlen(home) + 1));

@@ -22,6 +22,7 @@
 
 #include <sys/types.h>
 #include <ctype.h>
+#include <whb/proc.h>
 
 #include "defines.h"
 #include "globals.h"
@@ -36,43 +37,41 @@
 #include "texture.h"
 #include "tile.h"
 
-int main(int argc, char ** argv)
-{
-  st_directory_setup();
-  parseargs(argc, argv);
-  
-  st_audio_setup();
-  st_video_setup();
-  st_joystick_setup();
-  st_general_setup();
-  fadeout();
-  st_menu();
-  loadshared();
+int main(int argc, char ** argv) {
+	WHBProcInit();
 
-  if (launch_leveleditor_mode && level_startup_file)
-    {
-    leveleditor(level_startup_file);
-    }
-  else if (level_startup_file)
-    {
-      GameSession session(level_startup_file, 1, ST_GL_LOAD_LEVEL_FILE);
-      session.run();
-    }
-  else
-    { 
-      title();
-    }
-  
-  clearscreen(0, 0, 0);
-  updatescreen();
+	st_directory_setup();
+	parseargs(argc, argv);
 
-  unloadshared();
-  st_general_free();
-  TileManager::destroy_instance();
-#ifdef DEBUG
-  Surface::debug_check();
-#endif
-  st_shutdown();
-  
-  return 0;
+	st_audio_setup();
+	st_video_setup();
+	st_joystick_setup();
+	st_general_setup();
+	fadeout();
+	st_menu();
+	loadshared();
+
+	if (launch_leveleditor_mode && level_startup_file) {
+		leveleditor(level_startup_file);
+	} else if (level_startup_file) {
+		GameSession session(level_startup_file, 1, ST_GL_LOAD_LEVEL_FILE);
+		session.run();
+	} else {
+		title();
+	}
+
+	clearscreen(0, 0, 0);
+	updatescreen();
+
+	unloadshared();
+	st_general_free();
+	TileManager::destroy_instance();
+	#ifdef DEBUG
+	Surface::debug_check();
+	#endif
+	st_shutdown();
+
+	WHBProcShutdown();
+
+	return 0;
 }
